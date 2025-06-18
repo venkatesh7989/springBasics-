@@ -1,15 +1,17 @@
-package com.ecommerce.project;
+package com.ecommerce.project.EcomApplication.Model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import java.time.LocalDateTime;
 
 @Data
 @NoArgsConstructor
-//@AllArgsConstructor
+@AllArgsConstructor
 @Entity(name = "user_table")
 //@Entity
 public class User {
@@ -19,6 +21,23 @@ public class User {
     private String firstName;
     private String lastName;
     private String email;
+    private String phone;
+    private UserRole userRole = UserRole.CUSTOMER;
+
+// added Relationship between userAddress and Users classes
+    @OneToOne(cascade = CascadeType.ALL,orphanRemoval = true)
+    @JoinColumn(name = "uSerAddress_id",referencedColumnName ="id" )
+    private UserAddress userAddress;
+    @CreationTimestamp
+    private LocalDateTime createdAt;
+    @UpdateTimestamp
+    private LocalDateTime updatedAt;
+
+   public User(LocalDateTime createdAt, LocalDateTime updatedAt) {
+       this.createdAt = createdAt;
+       this.updatedAt = updatedAt;
+  }
+
 
     public String getEmail() {
         return email;
@@ -44,8 +63,7 @@ public class User {
         this.userRole = userRole;
     }
 
-    private String phone;
-    private UserRole userRole = UserRole.CUSTOMER;
+
 
 //    public User() {
 //    }
