@@ -1,6 +1,6 @@
-package com.ecommerce.project.EcomApplication.Dto;
+package com.ecommerce.project.Dto;
 
-import com.ecommerce.project.EcomApplication.Model.UserRole;
+import com.ecommerce.project.Model.UserRole;
 import lombok.Data;
 
 @Data

@@ -1,5 +1,6 @@
-package com.ecommerce.project.EcomApplication.Model;
+package com.ecommerce.project.Model;
 
+import com.ecommerce.project.Dto.UserAddressDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -23,7 +24,7 @@ public class User {
     private String email;
     private String phone;
     private UserRole userRole = UserRole.CUSTOMER;
-
+// working fine
 // added Relationship between userAddress and Users classes
     @OneToOne(cascade = CascadeType.ALL,orphanRemoval = true)
     @JoinColumn(name = "uSerAddress_id",referencedColumnName ="id" )
@@ -39,66 +40,6 @@ public class User {
   }
 
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public UserRole getUserRole() {
-        return userRole;
-    }
-
-    public void setUserRole(UserRole userRole) {
-        this.userRole = userRole;
-    }
 
 
-
-//    public User() {
-//    }
-//
-//    public User(long id, String firstName, String lastName) {
-//        this.id = id;
-//        this.firstName = firstName;
-//        this.lastName = lastName;
-//    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getLastName() {
-
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-
-        this.lastName = lastName;
-    }
-
-    public String getFirstName() {
-
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-
-        this.firstName = firstName;
-    }
 }

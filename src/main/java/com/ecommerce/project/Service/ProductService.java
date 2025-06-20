@@ -1,5 +1,7 @@
-package com.ecommerce.project.Dto;
+package com.ecommerce.project.Service;
 
+import com.ecommerce.project.Dto.ProductRequest;
+import com.ecommerce.project.Dto.ProductResponse;
 import com.ecommerce.project.Model.Product;
 import com.ecommerce.project.Repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
@@ -19,7 +21,7 @@ public class ProductService {
 
 
 
-    public  ProductResponse CreateProduct(ProductRequest productRequest) {
+    public ProductResponse CreateProduct(ProductRequest productRequest) {
         Product product= new Product();
         updateProductfromRequest(product,productRequest);
         Product savedProduct = productRepositoty.save(product);
@@ -35,7 +37,7 @@ public class ProductService {
         response.setDescription(saveProduct.getDescription());
         response.setActive(saveProduct.isActive());
         response.setImageUrl(saveProduct.getImageUrl());
-        response.setStockquantity(saveProduct.getStockquantity());
+        response.setStockquantity(saveProduct.getStockQuantity());
         response.setPrice(saveProduct.getPrice());
         return response;
     }
@@ -45,7 +47,7 @@ public class ProductService {
         product.setCategory(productRequest.getCategory());
         product.setDescription(productRequest.getDescription());
         product.setImageUrl(productRequest.getImageUrl());
-        product.setStockquantity(productRequest.getStockquantity());
+        product.setStockQuantity(productRequest.getStockquantity());
         product.setPrice(productRequest.getPrice());
     }
 
@@ -71,8 +73,8 @@ public class ProductService {
     }
 
     public List<ProductResponse> searchProduct(String keyword) {
-        return productRepository.searchProduct(keyword).stream()
-                .map(this::mapToProductResponse)
+        return productRepositoty.searchProduct(keyword).stream().map(this::mapToProductResponse)
                 .collect(Collectors.toList());
     }
+
 }

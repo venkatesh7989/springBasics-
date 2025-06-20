@@ -1,12 +1,9 @@
-#spring.application.name=Spring
-#spring.h2.console.enabled=ture
-#spring.datasource.url=jdbc:h2:mem:test
 spring:
   application:
     name: Spring
 
   datasource:
-    url: jdbc:h2:file:C:/Users/DELL/test;IFEXISTS=FALSE
+    url: jdbc:h2:file:C:/Users/DELL/test;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
     driver-class-name: org.h2.Driver
     username: sa
     password:
@@ -19,3 +16,9 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: create
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+
+server:
+  port: 9090
