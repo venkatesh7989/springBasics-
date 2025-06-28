@@ -1,11 +1,14 @@
 package com.ecommerce.project.controller;
 
 import com.ecommerce.project.Dto.CartiteamRequest;
+import com.ecommerce.project.Model.Cartitem;
 import com.ecommerce.project.Service.CartitemService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/cart")
@@ -31,6 +34,19 @@ public class CartitemController {
 
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
+@DeleteMapping("/item/{productId}")
+    public ResponseEntity<Void>removefromcart(@RequestHeader(value = "X-user-id", required = false) String userId,
+                                                  @PathVariable Long productId){
+   boolean delete= cartitemService.deleteByUserAndProduct(userId ,productId);
+    return delete?ResponseEntity.noContent().build():ResponseEntity.notFound().build();
+}
+@GetMapping
+    public ResponseEntity<List<Cartitem>>getcart(@RequestHeader("X-user-id") String userId){
+        return ResponseEntity.ok(cartitemService.getCart(userId));
 
+    }
 
 }
+
+
+
